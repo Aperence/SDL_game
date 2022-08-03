@@ -1,10 +1,11 @@
 #include "Game.h"
+#include "TextureManager.h"
+#include "GameObject.h"
+#include "Bullet.h"
 
 using namespace std;
 
-SDL_Texture* bulletTex;
-SDL_Rect bulletRect;
-bool renderBlt = true;
+Bullet* bullet;
 
 Game::Game() {
 
@@ -33,11 +34,11 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	else {
 		isRunning = false;
 	}
-	SDL_Surface* tmpSurf = IMG_Load("assets/bullet.png");
-	bulletTex = SDL_CreateTextureFromSurface(renderer, tmpSurf);
-	cout << "Loaded Texture" << endl;
-	bulletRect = { 0,0,32,32 };
-	SDL_FreeSurface(tmpSurf);
+
+	bullet = new Bullet("assets/bullet.png", renderer, 0, 0);
+	bullet->initSrcRect(0, 0, 258, 258);
+	bullet->initDestRect(0, 0, 128, 128);
+	
 }
 
 void Game::handleEvents() {
@@ -52,27 +53,19 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-	bulletRect.x++;
-	if (bulletRect.x >= 800 + 32) {
-		renderBlt = false;
-	}
+	bullet->update();
 }
 
 void Game::render() {
 	SDL_RenderClear(renderer);
-	if (renderBlt) {
-		SDL_RenderCopy(renderer, bulletTex, NULL, &bulletRect);
-	}
-	else {
-		cout << "Stop rendering" << endl;
-	}
+	bullet->render();
 	SDL_RenderPresent(renderer);
 }
 
 void Game::clean() {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
-	SDL_DestroyTexture(bulletTex);
+	delete bullet;
 	SDL_Quit();
 	cout << "Cleaned everything" << endl;
 }
