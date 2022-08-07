@@ -8,7 +8,7 @@
 class TextureManager {
 
 public:
-	static SDL_Texture* LoadTexture(const char* fileName, SDL_Renderer *renderer);
+	static SDL_Texture* LoadTexture(const char* fileName);
 };
 
 #endif // !TEXTURE_H

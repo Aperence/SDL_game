@@ -6,7 +6,7 @@
 
 class GameObject {
 public:
-	GameObject(const char* texturePath, SDL_Renderer* ren, int x, int y);
+	GameObject(const char* texturePath, int x, int y);
 	~GameObject();
 	void initSrcRect(int x, int y, int w, int h) {
 		srcRect = { x,y,w,h };
@@ -22,7 +22,6 @@ protected:
 	int xpos, ypos;
 	SDL_Rect srcRect, destRect;
 	SDL_Texture* objTexture;
-	SDL_Renderer* renderer;
 };
 
 #endif // !GAMEOBJECT_H

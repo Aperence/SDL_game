@@ -2,8 +2,12 @@
 #define GAME_H
 
 #include <iostream>
+#include <vector>
 #include "SDL.h"
 #include "SDL_image.h"
+#include <GameObject.h>
+
+using namespace std;
 
 class Game {
 public:
@@ -14,12 +18,16 @@ public:
 	void update();
 	void render();
 	void clean();
+	static void addObject(GameObject *o);
+	static void deleteObject(GameObject *o);
 	bool running() { return isRunning; }
+
+	static SDL_Renderer* renderer;
 
 private:
 	bool isRunning;
 	SDL_Window* window;
-	SDL_Renderer* renderer;
+	static vector<GameObject *> listObjects;
 };
 
 #endif // !GAME

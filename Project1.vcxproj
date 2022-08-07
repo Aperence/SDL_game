@@ -138,14 +138,17 @@
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
     <ClCompile Include="src\TextureManager.cpp" />
+    <ClCompile Include="src\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Bullet.h" />
     <ClInclude Include="headers\Game.h" />
     <ClInclude Include="headers\GameObject.h" />
     <ClInclude Include="headers\TextureManager.h" />
+    <ClInclude Include="headers\Utils.h" />
   </ItemGroup>
   <ItemGroup>
+    <None Include=".gitignore" />
     <None Include="README.md" />
   </ItemGroup>
   <ItemGroup>
