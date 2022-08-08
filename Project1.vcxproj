@@ -142,6 +142,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Bullet.h" />
+    <ClInclude Include="headers\ECS\Components.h" />
+    <ClInclude Include="headers\ECS\ECS.h" />
+    <ClInclude Include="headers\ECS\PositionComponent.h" />
+    <ClInclude Include="headers\ECS\SpriteComponent.h" />
     <ClInclude Include="headers\Game.h" />
     <ClInclude Include="headers\GameObject.h" />
     <ClInclude Include="headers\TextureManager.h" />

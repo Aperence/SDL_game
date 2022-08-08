@@ -25,8 +25,5 @@ void Bullet::update() {
 	xpos = (int) v[0];
 	ypos = (int) v[1];
 	GameObject::update();
-	if (xpos < 0 || xpos > 800 || ypos<0 || ypos > 450) {
-		Game::deleteObject(this);
-		
-	}
+
 }

@@ -18,8 +18,6 @@ public:
 	void update();
 	void render();
 	void clean();
-	static void addObject(GameObject *o);
-	static void deleteObject(GameObject *o);
 	bool running() { return isRunning; }
 
 	static SDL_Renderer* renderer;
@@ -27,7 +25,6 @@ public:
 private:
 	bool isRunning;
 	SDL_Window* window;
-	static vector<GameObject *> listObjects;
 };
 
 #endif // !GAME

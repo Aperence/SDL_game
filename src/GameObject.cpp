@@ -6,7 +6,6 @@ GameObject::GameObject(const char* texturePath, int x, int y) {
 	xpos = x;
 	ypos = y;
 	objTexture = TextureManager::LoadTexture(texturePath);
-	Game::addObject(this);
 }
 
 void GameObject::update() {

@@ -5,13 +5,16 @@
 #include "Utils.h"
 #include <stdlib.h>     /* srand, rand */
 #include <time.h> 
+#include "ECS/Components.h"
 
 using namespace std;
 
 
 
 SDL_Renderer* Game::renderer;
-vector<GameObject*> Game::listObjects = vector<GameObject*>();
+Manager manager;
+auto& bullet = manager.addEntity();
+
 
 Game::Game() {
 
@@ -42,14 +45,18 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	else {
 		isRunning = false;
 	}
+	/*
 	for (size_t i = 0; i < 440; i+=25)
 	{
 		Bullet *bullet = new Bullet("assets/bullet.png", 0, i);
 		bullet->initSrcRect(0, 0, 258, 258);
 		bullet->initDestRect(0, i, 20, 20);
 		bullet->setPhysic(50, 0, rand() % 10, 0);
-	}
+	}*/
 
+	bullet.addComponent<PositionComponent>();
+	bullet.addComponent<SpriteComponent>("assets/bullet.png");
+	bullet.getComponent<SpriteComponent>().setSrc(258, 258);
 	
 }
 
@@ -65,42 +72,19 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
-	for (size_t i = 0; i < listObjects.size(); i++)
-	{
-		((Bullet *)listObjects[i])->update();
-	}
+	manager.refresh();
+	manager.update();
 }
 
 void Game::render() {
 	SDL_RenderClear(renderer);
-	for (size_t i = 0; i < listObjects.size(); i++)
-	{
-		listObjects[i]->render();
-	}
+	manager.render();
 	SDL_RenderPresent(renderer);
 }
 
 void Game::clean() {
 	SDL_DestroyWindow(window);
 	SDL_DestroyRenderer(renderer);
-	for (size_t i = 0; i < listObjects.size(); i++)
-	{
-		delete listObjects[i];
-	}
 	SDL_Quit();
 	cout << "Cleaned everything" << endl;
-}
-
-void Game::addObject(GameObject *o) {
-	listObjects.push_back(o);
-}
-
-void Game::deleteObject(GameObject *o) {
-	for (size_t i = 0; i < listObjects.size(); i++)
-	{
-		if (listObjects[i] == o) {
-			listObjects.erase(listObjects.begin() + i);
-			return;
-		}
-	}
 }
