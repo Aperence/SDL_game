@@ -1,11 +1,14 @@
-#pragma once
+#ifndef SPRITE_COMPO_H
+#define SPRITE_COMPO_H
+
 #include "ECS.h"
 #include "SDL.h"
 #include "TextureManager.h"
+#include "Game.h"
 
 class SpriteComponent : public Component {
 private:
-	PositionComponent *position;
+	TransformComponent* position;
 	SDL_Texture *tex;
 	SDL_Rect srcRect, destRect;
 
@@ -21,7 +24,7 @@ public:
 	void init() override {
 		srcRect = { 0,0,32,32 };
 		destRect = { 0,0,64,64 };
-		position = &entity->getComponent<PositionComponent>();
+		position = &entity->getComponent<TransformComponent >();
 	}
 
 	void setSrc(int w, int h) {
@@ -35,11 +38,12 @@ public:
 	}
 
 	void update() override {
-		destRect.x = position->x();
-		destRect.y = position->y();
+		destRect.x = position->position.x;
+		destRect.y = position->position.y;
 	}
 
 	void render() override {
-		SDL_RenderCopy(Game::renderer, tex, &srcRect, &destRect);
+		TextureManager::render(tex, srcRect, destRect);
 	}
 };
+#endif

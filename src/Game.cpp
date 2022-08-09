@@ -1,11 +1,11 @@
 #include "Game.h"
 #include "TextureManager.h"
 #include "GameObject.h"
-#include "Bullet.h"
 #include "Utils.h"
 #include <stdlib.h>     /* srand, rand */
 #include <time.h> 
 #include "ECS/Components.h"
+#include "Script/Bullet.h"
 
 using namespace std;
 
@@ -54,10 +54,10 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		bullet->setPhysic(50, 0, rand() % 10, 0);
 	}*/
 
-	bullet.addComponent<PositionComponent>();
+	bullet.addComponent<TransformComponent>();
 	bullet.addComponent<SpriteComponent>("assets/bullet.png");
 	bullet.getComponent<SpriteComponent>().setSrc(258, 258);
-	
+	bullet.addBehaviour<BulletScript>();
 }
 
 void Game::handleEvents() {

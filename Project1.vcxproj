@@ -133,7 +133,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\Bullet.cpp" />
+    <ClCompile Include="src\Vector2D.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Game.cpp" />
     <ClCompile Include="src\GameObject.cpp" />
@@ -141,15 +141,16 @@
     <ClCompile Include="src\Utils.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="headers\Bullet.h" />
     <ClInclude Include="headers\ECS\Components.h" />
     <ClInclude Include="headers\ECS\ECS.h" />
-    <ClInclude Include="headers\ECS\PositionComponent.h" />
+    <ClInclude Include="headers\ECS\TransformComponent.h" />
     <ClInclude Include="headers\ECS\SpriteComponent.h" />
     <ClInclude Include="headers\Game.h" />
     <ClInclude Include="headers\GameObject.h" />
+    <ClInclude Include="headers\Script\Bullet.h" />
     <ClInclude Include="headers\TextureManager.h" />
     <ClInclude Include="headers\Utils.h" />
+    <ClInclude Include="headers\Vector2D.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />

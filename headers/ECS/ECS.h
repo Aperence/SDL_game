@@ -41,6 +41,11 @@ public:
 	virtual ~Component(){}
 };
 
+class Behaviour : public Component{
+public:
+	virtual void onCollide() {};
+};
+
 class Entity {
 
 private:
@@ -51,6 +56,9 @@ private:
 	ComponentBitSet componentBitSet;
 
 public:
+
+	vector<Behaviour> scripts;
+
 	void update() {
 		for (auto& c : components) c->update();
 	}
@@ -76,6 +84,13 @@ public:
 
 		c->init();
 		return *c;
+	}
+
+	template<typename T, typename... TArgs>
+	T& addBehaviour(TArgs&&... args) {
+		T& script = addComponent<T, TArgs...>(forward<TArgs>(args)...);
+		scripts.emplace_back(script);
+		return script;
 	}
 
 	template<typename T>
