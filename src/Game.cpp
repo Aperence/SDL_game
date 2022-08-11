@@ -14,6 +14,8 @@ using namespace std;
 SDL_Renderer* Game::renderer;
 Manager manager;
 auto& bullet = manager.addEntity();
+SDL_Event Game::event;
+
 
 
 Game::Game() {
@@ -34,6 +36,9 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		cout << "Initialized subsystem" << endl;
 
 		window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
+		SDL_Surface *temp = IMG_Load("assets/bullet.png");
+		SDL_SetWindowIcon(window, temp);
+		SDL_FreeSurface(temp);
 		renderer = SDL_CreateRenderer(window, -1, 0);
 
 		if (renderer) {
@@ -58,13 +63,13 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	bullet.addComponent<SpriteComponent>("assets/bullet.png");
 	bullet.getComponent<SpriteComponent>().setSrc(258, 258);
 	bullet.addBehaviour<BulletScript>();
+	bullet.addComponent<KeyboardController>();
+	bullet.addComponent<ColliderComponent>();
 }
 
 void Game::handleEvents() {
-	SDL_Event event;
-	SDL_PollEvent(&event);
-
-	switch (event.type) {
+	SDL_PollEvent(&Game::event);
+	switch (Game::event.type) {
 	case SDL_QUIT:
 		isRunning = false;
 		break;

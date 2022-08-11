@@ -24,5 +24,13 @@ public:
 	Vector2D& operator *=(const Vector2D& v);
 	Vector2D& operator /=(const Vector2D& v);
 
+	friend Vector2D& operator *(const Vector2D& v,const float h);
+	friend Vector2D& operator *(const float h, const Vector2D& v);
+
+	friend Vector2D& operator /(const Vector2D& v, const float h);
+	friend Vector2D& operator /(const float h, const Vector2D& v);
+
 	friend std::ostream& operator<<(std::ostream& stream, const Vector2D& v);
+
+	void normalize();
 };

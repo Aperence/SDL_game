@@ -7,6 +7,7 @@
 #include <bitset>
 #include <algorithm>
 #include <memory>
+#include "SDL.h"
 
 using namespace std;
 
@@ -43,7 +44,10 @@ public:
 
 class Behaviour : public Component{
 public:
+	virtual void init(){};
 	virtual void onCollide() {};
+	virtual void handleInput(SDL_Event& event) {};
+	virtual void onCollide(Entity& other) {};
 };
 
 class Entity {
@@ -57,7 +61,7 @@ private:
 
 public:
 
-	vector<Behaviour> scripts;
+	vector<unique_ptr<Behaviour>> scripts;
 
 	void update() {
 		for (auto& c : components) c->update();
@@ -88,9 +92,16 @@ public:
 
 	template<typename T, typename... TArgs>
 	T& addBehaviour(TArgs&&... args) {
-		T& script = addComponent<T, TArgs...>(forward<TArgs>(args)...);
-		scripts.emplace_back(script);
-		return script;
+		T* c(new T(forward<TArgs>(args)...));
+		c->entity = this;
+		unique_ptr<Behaviour> uPtr{ c };
+		scripts.emplace_back(move(uPtr));
+
+		componentArray[getComponentTypeID<T>()] = c;
+		componentBitSet[getComponentTypeID<T>()] = true;
+
+		c->init();
+		return *c;
 	}
 
 	template<typename T>

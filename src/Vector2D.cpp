@@ -4,7 +4,7 @@
 
 Vector2D::Vector2D()
 {
-    x = y = 0;
+    x = y = 0.0f;
 }
 
 Vector2D::Vector2D(float x, float y)
@@ -79,6 +79,37 @@ Vector2D& Vector2D::operator*=(const Vector2D& v)
 Vector2D& Vector2D::operator/=(const Vector2D& v)
 {
     return *this / v;
+}
+
+void Vector2D::normalize()
+{
+    float length = x * x + y * y;
+    if (length < 0.0000001) return;
+    x = x / length;
+    y = y / length;
+}
+
+
+Vector2D& operator*(const Vector2D& v, const float h)
+{
+    Vector2D *ret = new Vector2D(v.x * h, v.y * h);
+    return *ret;
+}
+
+Vector2D& operator*(const float h, const Vector2D& v)
+{
+    return v * h;
+}
+
+Vector2D& operator/(const Vector2D& v, const float h)
+{
+    Vector2D *ret = new Vector2D(v.x / h, v.y / h);
+    return *ret;
+}
+
+Vector2D& operator/(const float h, const Vector2D& v)
+{
+    return v / h;
 }
 
 std::ostream& operator<<(std::ostream& stream, const Vector2D& v)
