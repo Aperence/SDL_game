@@ -6,6 +6,7 @@
 #include <time.h> 
 #include "ECS/Components.h"
 #include "Script/Bullet.h"
+#include "Collision.h"
 
 using namespace std;
 
@@ -14,6 +15,7 @@ using namespace std;
 SDL_Renderer* Game::renderer;
 Manager manager;
 auto& bullet = manager.addEntity();
+auto& bullet2 = manager.addEntity();
 SDL_Event Game::event;
 
 
@@ -59,12 +61,17 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 		bullet->setPhysic(50, 0, rand() % 10, 0);
 	}*/
 
-	bullet.addComponent<TransformComponent>();
+	bullet.addComponent<TransformComponent>(0,0,258,258,0.25);
 	bullet.addComponent<SpriteComponent>("assets/bullet.png");
 	bullet.getComponent<SpriteComponent>().setSrc(258, 258);
 	bullet.addBehaviour<BulletScript>();
 	bullet.addComponent<KeyboardController>();
 	bullet.addComponent<ColliderComponent>();
+
+	bullet2.addComponent<TransformComponent>(250, 250, 258, 258, 1.0/16.0);
+	bullet2.addComponent<SpriteComponent>("assets/bullet.png");
+	bullet2.getComponent<SpriteComponent>().setSrc(258, 258);
+	bullet2.addComponent<ColliderComponent>();
 }
 
 void Game::handleEvents() {
@@ -79,6 +86,11 @@ void Game::handleEvents() {
 void Game::update() {
 	manager.refresh();
 	manager.update();
+	manager.checkCollisions();
+	/*
+	if (Collision::AABB(bullet.getComponent<ColliderComponent>().collider, bullet2.getComponent<ColliderComponent>().collider)) {
+		cout << "Collision" << endl;
+	}*/
 }
 
 void Game::render() {

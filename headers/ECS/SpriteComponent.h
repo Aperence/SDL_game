@@ -27,9 +27,9 @@ public:
 	}
 
 	void init() override {
-		srcRect = { 0,0,32,32 };
-		destRect = { 0,0,64,64 };
 		transform = &entity->getComponent<TransformComponent >();
+		srcRect = { 0,0, transform->width, transform->height };
+		destRect = { 0,0,static_cast<int>(transform->width*transform->scale),static_cast<int>(transform->height* transform->scale) };
 	}
 
 	void setSrc(int w, int h) {
@@ -43,7 +43,6 @@ public:
 	}
 
 	void update() override {
-		//cout << transform->position << endl;
 		destRect.x = (int) transform->position.x;
 		destRect.y = (int) transform->position.y;
 	}

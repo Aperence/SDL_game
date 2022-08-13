@@ -20,6 +20,10 @@ public:
 		//position.position = position.position + Vector2D(0, 7.5);
 	}
 
+	void onCollide(Entity& other) {
+		cout << "Collision" << endl;
+	}
+
 	
 	void handleInput(SDL_Event& event) override {
 		if (event.type == SDL_KEYDOWN) {

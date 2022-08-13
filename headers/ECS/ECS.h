@@ -8,6 +8,8 @@
 #include <algorithm>
 #include <memory>
 #include "SDL.h"
+#include "Components.h"
+#include "Collision.h"
 
 using namespace std;
 
@@ -45,7 +47,6 @@ public:
 class Behaviour : public Component{
 public:
 	virtual void init(){};
-	virtual void onCollide() {};
 	virtual void handleInput(SDL_Event& event) {};
 	virtual void onCollide(Entity& other) {};
 };
@@ -68,6 +69,9 @@ public:
 	}
 	void render() {
 		for (auto& c : components) c->render();
+	}
+	void collide(Entity& other) {
+		for (auto& s : scripts) s->onCollide(other);
 	}
 	void destroy() { active = false; }
 	bool isActive() { return active; }
@@ -112,32 +116,7 @@ public:
 
 };
 
-class Manager {
-private:
-	vector<unique_ptr<Entity>> entities;
-public:
-	void update() {
-		for (auto& e : entities) e->update();
-	}
-	void render() {
-		for (auto& e : entities) e->render();
-	}
-	void refresh() {
-		entities.erase(
-			remove_if(entities.begin(), entities.end(), [](const unique_ptr<Entity> &entity) {
-				return !entity->isActive();
-				})
-			, entities.end()
-					);
-	}
-	Entity& addEntity() {
-		Entity* e = new Entity();
-		unique_ptr<Entity> uPtr{ e };
-		entities.emplace_back(move(uPtr));
 
-		return *e;
-	}
-};
 
 
 #endif
