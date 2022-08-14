@@ -33,6 +33,11 @@ constexpr size_t maxComponents = 32;
 using ComponentArray = array<Component*, maxComponents>;
 using ComponentBitSet = bitset<maxComponents>;
 
+inline int MygetID() {
+	static int id = 0;
+	return id++;
+}
+
 class Component {
 public:
 	Entity* entity;
@@ -54,6 +59,8 @@ public:
 class Entity {
 
 private:
+
+
 	bool active = true;
 	vector<unique_ptr<Component>> components;
 
@@ -62,7 +69,12 @@ private:
 
 public:
 
+	int ID;
 	vector<unique_ptr<Behaviour>> scripts;
+
+	Entity() {
+		ID = MygetID();
+	}
 
 	void update() {
 		for (auto& c : components) c->update();

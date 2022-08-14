@@ -1,4 +1,5 @@
-#pragma once
+#ifndef WAVE_BULLET_H
+#define WAVE_BULLET_H
 
 
 #pragma once
@@ -20,13 +21,14 @@ private:
 
 public:
 	WavingBulletScript() = default;
-	WavingBulletScript(double angle, double speed) {
+	WavingBulletScript(double angle, double speed, float xpos, float ypos) {
 		this->angle = angle;
 		this->speed = speed;
+		center = Vector2D(xpos, ypos);
 	};
 
 	void init() {
-		entity->addComponent<TransformComponent>(center.x - 129.0*0.125, center.y - 129.0 * 0.125, 258, 258, 0.125);
+		entity->addComponent<TransformComponent>(center.x, center.y, 258, 258, 0.08);
 		entity->addComponent<SpriteComponent>("assets/bullet.png");
 		transform = &entity->getComponent<TransformComponent>();
 		transform->speed = (float)speed;
@@ -35,13 +37,23 @@ public:
 
 	void update() {
 		fps++;
-		//if (fps < 600) return;
 		entity->getComponent<SpriteComponent>().display = true;
-		Vector2D oscillation = Vector2D( (float) fps*2 , oscillationSize*sin(M_PI * fps / frequency));
+		Vector2D oscillation = Vector2D( (float) fps*speed , oscillationSize*sin(M_PI * fps / frequency));
 
 		oscillation += center;
 		oscillation.rotate(angle, center);
 
 		transform->position = oscillation;
+
+		int x = transform->position.x;
+		int y = transform->position.y;
+		int w = transform->width;
+		int h = transform->height;
+		int scale = transform->scale;
+		if (x > Game::width + w * scale / 2.0 || x < 0 - w * scale / 2.0 || y > Game::height + h * scale / 2.0 || y < 0 - h * scale / 2.0) {
+			entity->destroy();
+		}
 	};
 };
+
+#endif

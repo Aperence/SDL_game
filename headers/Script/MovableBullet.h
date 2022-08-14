@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MOVABLE_BULLET_H
+#define MOVABLE_BULLET_H
 
 #include "ECS/Components.h"
 #include "Vector2D.h"
@@ -68,3 +69,5 @@ public:
 		position->velocity = Vector2D((float) arr[0] + arr[1], (float) arr[2] + arr[3]);
 	}
 };
+
+#endif

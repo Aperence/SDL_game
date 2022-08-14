@@ -10,7 +10,7 @@ SDL_Texture* TextureManager::LoadTexture(const char* fileName) {
 
 	SDL_FreeSurface(tempSurf);
 
-	cout << "Rendered texture " << fileName << endl;
+	//cout << "Rendered texture " << fileName << endl;
 
 	return ret;
 }

@@ -5,23 +5,22 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h> 
 #include "ECS/Components.h"
-#include "Script/MovableBullet.h"
-#include "Script/Bullet.h"
-#include "Script/WavingBullet.h"
 #include "Collision.h"
+
+#include "Script/MovableBullet.h"
+#include "Script/BulletSpawner.h"
 
 
 using namespace std;
 
-
-
 SDL_Renderer* Game::renderer;
+int Game::fps = 0;
+int Game::width = 0;
+int Game::height = 0;
+
 Manager manager;
 auto& bullet = manager.addEntity();
-
-#define N_BULLET 18
-Entity *bullets[N_BULLET];
-Entity *wavingBullets[N_BULLET];
+auto& bulletSpawner = manager.addEntity();
 
 SDL_Event Game::event;
 
@@ -42,7 +41,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	if (SDL_Init(SDL_INIT_EVERYTHING) == 0) {
 
-		cout << "Initialized subsystem" << endl;
+		//cout << "Initialized subsystem" << endl;
 
 		window = SDL_CreateWindow(title, xpos, ypos, width, height, flags);
 		SDL_Surface *temp = IMG_Load("assets/bullet.png");
@@ -59,33 +58,17 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	else {
 		isRunning = false;
 	}
-	/*
-	for (size_t i = 0; i < 440; i+=25)
-	{
-		Bullet *bullet = new Bullet("assets/bullet.png", 0, i);
-		bullet->initSrcRect(0, 0, 258, 258);
-		bullet->initDestRect(0, i, 20, 20);
-		bullet->setPhysic(50, 0, rand() % 10, 0);
-	}*/
 
-	bullet.addComponent<TransformComponent>(0,0,258,258,0.25);
+	SDL_GetWindowSize(window, &Game::width, &Game::height);
+
+	float half = 258.0 * 0.125 / 2.0;
+	bullet.addComponent<TransformComponent>(width/2 - half ,height/2 - half,258,258,0.125);
 	bullet.addComponent<SpriteComponent>("assets/bullet.png");
-	bullet.getComponent<SpriteComponent>().setSrc(258, 258);
 	bullet.addBehaviour<MovableBulletScript>();
 	bullet.addComponent<KeyboardController>();
 	bullet.addComponent<ColliderComponent>();
 
-	for (size_t i = 0; i < N_BULLET; i++)
-	{
-		/*
-		Entity *e = &manager.addEntity();
-		bullets[i] = e;
-		e->addBehaviour<BulletScript>(i * (360.0/ N_BULLET), 1.0);*/
-
-		Entity* w = &manager.addEntity();
-		wavingBullets[i] = w;
-		w->addBehaviour<WavingBulletScript>(i * (360.0 / N_BULLET), 1.0);
-	}
+	bulletSpawner.addBehaviour<BulletSpawner>(&manager);
 }
 
 void Game::handleEvents() {
@@ -98,13 +81,10 @@ void Game::handleEvents() {
 }
 
 void Game::update() {
+	Game::fps++;
 	manager.refresh();
 	manager.update();
 	manager.checkCollisions();
-	/*
-	if (Collision::AABB(bullet.getComponent<ColliderComponent>().collider, bullet2.getComponent<ColliderComponent>().collider)) {
-		cout << "Collision" << endl;
-	}*/
 }
 
 void Game::render() {

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef VECTOR_H
+#define VECTOR_H
+
 #include <iostream>
 
 class Vector2D {
@@ -36,3 +38,5 @@ public:
 
 	void rotate(double angle, Vector2D center);
 };
+
+#endif // !VECTOR_H

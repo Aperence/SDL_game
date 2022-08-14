@@ -5,7 +5,6 @@
 #include <vector>
 #include "SDL.h"
 #include "SDL_image.h"
-#include <GameObject.h>
 
 using namespace std;
 
@@ -20,8 +19,12 @@ public:
 	void clean();
 	bool running() { return isRunning; }
 
+
 	static SDL_Renderer* renderer;
 	static SDL_Event event;
+	static int fps;
+	static int width;
+	static int height;
 
 private:
 	bool isRunning;

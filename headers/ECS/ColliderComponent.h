@@ -1,4 +1,6 @@
-#pragma once
+#ifndef COLLIDER_H
+#define COLLIDER_H
+
 #include "SDL.h"
 #include "ECS.h"
 #include <string>
@@ -28,3 +30,4 @@ public:
 		collider.h = static_cast<int>(transform->height * transform->scale);
 	}
 };
+#endif
