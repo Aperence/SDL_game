@@ -3,6 +3,9 @@
 
 #include "ECS.h"
 #include "Vector2D.h"
+#include "Utils.h"
+#include <vector>
+
 
 class TransformComponent : public Component {
 
@@ -10,6 +13,8 @@ public:
 
 	Vector2D position;
 	Vector2D velocity;
+	Vector2D acceleration = Vector2D();
+	//vector<Vector2D*> v = { position, &velocity, &acceleration };
 	float speed = 3.0f;
 
 
@@ -33,8 +38,9 @@ public:
 		velocity = Vector2D();
 	}
 
+
 	void update() {
-		velocity.normalize();
+		//Utils::RK4(v, F);
 		position += velocity*speed;
 	}
 

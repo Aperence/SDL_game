@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Vector2D.h"
 #include "ECS/Components.h"
+#include <math.h>
 
 Vector2D::Vector2D()
 {
@@ -118,4 +119,11 @@ std::ostream& operator<<(std::ostream& stream, const Vector2D& v)
     return stream;
 }
 
+void Vector2D::rotate(double angle, Vector2D center) {
+    double angle_rad = angle * M_PI / 180.0;
+    float oldX = x;
+    float oldY = y;
+    x = (oldX-center.x) * cos(angle_rad) - (oldY-center.y) * sin(angle_rad) + center.x;
+    y = (oldX - center.x) * sin(angle_rad) + (oldY - center.y) * cos(angle_rad) + center.y;
+}
 

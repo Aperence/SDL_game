@@ -153,6 +153,8 @@
     <ClInclude Include="headers\Game.h" />
     <ClInclude Include="headers\GameObject.h" />
     <ClInclude Include="headers\Script\Bullet.h" />
+    <ClInclude Include="headers\Script\MovableBullet.h" />
+    <ClInclude Include="headers\Script\WavingBullet.h" />
     <ClInclude Include="headers\TextureManager.h" />
     <ClInclude Include="headers\Utils.h" />
     <ClInclude Include="headers\Vector2D.h" />

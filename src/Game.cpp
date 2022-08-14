@@ -5,8 +5,11 @@
 #include <stdlib.h>     /* srand, rand */
 #include <time.h> 
 #include "ECS/Components.h"
+#include "Script/MovableBullet.h"
 #include "Script/Bullet.h"
+#include "Script/WavingBullet.h"
 #include "Collision.h"
+
 
 using namespace std;
 
@@ -15,7 +18,11 @@ using namespace std;
 SDL_Renderer* Game::renderer;
 Manager manager;
 auto& bullet = manager.addEntity();
-auto& bullet2 = manager.addEntity();
+
+#define N_BULLET 18
+Entity *bullets[N_BULLET];
+Entity *wavingBullets[N_BULLET];
+
 SDL_Event Game::event;
 
 
@@ -64,14 +71,21 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	bullet.addComponent<TransformComponent>(0,0,258,258,0.25);
 	bullet.addComponent<SpriteComponent>("assets/bullet.png");
 	bullet.getComponent<SpriteComponent>().setSrc(258, 258);
-	bullet.addBehaviour<BulletScript>();
+	bullet.addBehaviour<MovableBulletScript>();
 	bullet.addComponent<KeyboardController>();
 	bullet.addComponent<ColliderComponent>();
 
-	bullet2.addComponent<TransformComponent>(250, 250, 258, 258, 1.0/16.0);
-	bullet2.addComponent<SpriteComponent>("assets/bullet.png");
-	bullet2.getComponent<SpriteComponent>().setSrc(258, 258);
-	bullet2.addComponent<ColliderComponent>();
+	for (size_t i = 0; i < N_BULLET; i++)
+	{
+		/*
+		Entity *e = &manager.addEntity();
+		bullets[i] = e;
+		e->addBehaviour<BulletScript>(i * (360.0/ N_BULLET), 1.0);*/
+
+		Entity* w = &manager.addEntity();
+		wavingBullets[i] = w;
+		w->addBehaviour<WavingBulletScript>(i * (360.0 / N_BULLET), 1.0);
+	}
 }
 
 void Game::handleEvents() {

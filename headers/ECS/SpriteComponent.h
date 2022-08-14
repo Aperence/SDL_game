@@ -13,6 +13,9 @@ private:
 	SDL_Rect srcRect, destRect;
 
 public:
+
+	bool display = true;
+
 	SpriteComponent() = default;
 	SpriteComponent(const char* path) {
 		setTex(path);
@@ -48,6 +51,7 @@ public:
 	}
 
 	void render() override {
+		if (!display) return;
 		TextureManager::render(tex, srcRect, destRect);
 	}
 };

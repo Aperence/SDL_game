@@ -33,4 +33,6 @@ public:
 	friend std::ostream& operator<<(std::ostream& stream, const Vector2D& v);
 
 	void normalize();
+
+	void rotate(double angle, Vector2D center);
 };

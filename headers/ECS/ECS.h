@@ -66,9 +66,11 @@ public:
 
 	void update() {
 		for (auto& c : components) c->update();
+		for (auto& s : scripts) s->update();
 	}
 	void render() {
 		for (auto& c : components) c->render();
+		for (auto& s : scripts) s->render();
 	}
 	void collide(Entity& other) {
 		for (auto& s : scripts) s->onCollide(other);

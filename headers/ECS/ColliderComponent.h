@@ -22,8 +22,8 @@ public:
 	}
 
 	void update() {
-		collider.x = transform->position.x;
-		collider.y = transform->position.y;
+		collider.x = (int) transform->position.x;
+		collider.y = (int) transform->position.y;
 		collider.w = static_cast<int>(transform->width*transform->scale);
 		collider.h = static_cast<int>(transform->height * transform->scale);
 	}
