@@ -3,11 +3,11 @@
 
 #include "Components.h"
 
-
 class Manager {
 private:
 	vector<unique_ptr<Entity>> entities;
 	vector<unique_ptr<Entity>> waiting_list;
+
 public:
 	void update();
 	void render();
@@ -17,6 +17,8 @@ public:
 	Entity& addEntity();
 
 	Entity& pushEntity();
+
+
 };
 
 #endif

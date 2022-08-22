@@ -16,30 +16,26 @@ Vector2D::Vector2D(float x, float y)
 
 Vector2D& Vector2D::Add(const Vector2D& v)
 {
-    x += v.x;
-    y += v.y;
-    return *this;
+    Vector2D ret = Vector2D(x + v.x, y + v.y);
+    return ret;
 }
 
 Vector2D& Vector2D::Substract(const Vector2D& v)
 {
-    x -= v.x;
-    y -= v.y;
-    return *this;
+    Vector2D ret = Vector2D(x - v.x, y - v.y);
+    return ret;
 }
 
 Vector2D& Vector2D::Multiply(const Vector2D& v)
 {
-    x *= v.x;
-    y *= v.y;
-    return *this;
+    Vector2D ret = Vector2D(x * v.x, y * v.y);
+    return ret;
 }
 
 Vector2D& Vector2D::Divide(const Vector2D& v)
 {
-    x /= v.x;
-    y /= v.y;
-    return *this;
+    Vector2D ret = Vector2D(x / v.x, y / v.y);
+    return ret;
 }
 
 Vector2D& operator+(Vector2D& v1, const Vector2D& v2)
@@ -64,22 +60,26 @@ Vector2D& operator/(Vector2D& v1, const Vector2D& v2)
 
 Vector2D& Vector2D::operator+=(const Vector2D& v)
 {
-    return *this + v;
+    *this = *this + v;
+    return *this;
 }
 
 Vector2D& Vector2D::operator-=(const Vector2D& v)
 {
-    return *this - v;
+    *this = *this - v;
+    return *this;
 }
 
 Vector2D& Vector2D::operator*=(const Vector2D& v)
 {
-    return *this * v;
+    *this = *this * v;
+    return *this;
 }
 
 Vector2D& Vector2D::operator/=(const Vector2D& v)
 {
-    return *this / v;
+    *this = *this / v;
+    return *this;
 }
 
 void Vector2D::normalize()
@@ -125,5 +125,13 @@ void Vector2D::rotate(double angle, Vector2D center) {
     float oldY = y;
     x = (oldX-center.x) * cos(angle_rad) - (oldY-center.y) * sin(angle_rad) + center.x;
     y = (oldX - center.x) * sin(angle_rad) + (oldY - center.y) * cos(angle_rad) + center.y;
+}
+
+void Vector2D::rotate_rad(double angle, Vector2D center)
+{
+    float oldX = x;
+    float oldY = y;
+    x = (oldX - center.x) * cos(angle) - (oldY - center.y) * sin(angle) + center.x;
+    y = (oldX - center.x) * sin(angle) + (oldY - center.y) * cos(angle) + center.y;
 }
 

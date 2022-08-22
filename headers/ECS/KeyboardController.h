@@ -5,9 +5,7 @@
 
 class KeyboardController : public Component {
 public:
-	void update() {
-		for (auto& s : entity->scripts) s->handleInput(Game::event);
-	}
+	void update();
 };
 
 #endif

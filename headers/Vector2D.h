@@ -37,6 +37,7 @@ public:
 	void normalize();
 
 	void rotate(double angle, Vector2D center);
+	void rotate_rad(double angle, Vector2D center);
 };
 
 #endif // !VECTOR_H

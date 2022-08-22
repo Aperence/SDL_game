@@ -8,7 +8,6 @@
 #include <algorithm>
 #include <memory>
 #include "SDL.h"
-#include "Components.h"
 #include "Collision.h"
 
 using namespace std;

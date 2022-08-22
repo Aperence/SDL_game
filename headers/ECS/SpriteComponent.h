@@ -5,6 +5,7 @@
 #include "SDL.h"
 #include "TextureManager.h"
 #include "Game.h"
+#include "Components.h"
 
 class SpriteComponent : public Component {
 private:
@@ -17,42 +18,20 @@ public:
 	bool display = true;
 
 	SpriteComponent() = default;
-	SpriteComponent(const char* path) {
-		setTex(path);
-	}
+	SpriteComponent(const char* path);
 
-	~SpriteComponent() {
-		SDL_DestroyTexture(tex);
-	}
+	~SpriteComponent();
 
-	void setTex(const char* path) {
-		tex = TextureManager::LoadTexture(path);
-	}
+	void setTex(const char* path);
 
-	void init() override {
-		transform = &entity->getComponent<TransformComponent >();
-		srcRect = { 0,0, transform->width, transform->height };
-		destRect = { 0,0,static_cast<int>(transform->width*transform->scale),static_cast<int>(transform->height* transform->scale) };
-	}
+	void init() override;
 
-	void setSrc(int w, int h) {
-		srcRect.w = w;
-		srcRect.h = w;
-	}
+	void setSrc(int w, int h);
 
-	void setDest(int w, int h) {
-		destRect.w = w;
-		srcRect.h = h;
-	}
+	void setDest(int w, int h);
 
-	void update() override {
-		destRect.x = (int) transform->position.x;
-		destRect.y = (int) transform->position.y;
-	}
+	void update() override;
 
-	void render() override {
-		if (!display) return;
-		TextureManager::render(tex, srcRect, destRect);
-	}
+	void render() override;
 };
 #endif

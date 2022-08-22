@@ -9,6 +9,7 @@
 
 #include "Script/MovableBullet.h"
 #include "Script/BulletSpawner.h"
+#include "Script/Polygon.h"
 
 
 using namespace std;
@@ -17,7 +18,6 @@ SDL_Renderer* Game::renderer;
 int Game::fps = 0;
 int Game::width = 0;
 int Game::height = 0;
-
 Manager manager;
 auto& bullet = manager.addEntity();
 auto& bulletSpawner = manager.addEntity();
@@ -69,6 +69,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 	bullet.addComponent<ColliderComponent>();
 
 	bulletSpawner.addBehaviour<BulletSpawner>(&manager);
+	//bulletSpawner.addBehaviour<Polygon>(Vector2D(200,200), Vector2D(1, 0), 1, 5, 90, 50, &manager, 7);
 }
 
 void Game::handleEvents() {

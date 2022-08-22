@@ -3,6 +3,7 @@
 
 #include "SDL.h"
 #include "ECS.h"
+#include "Components.h"
 #include <string>
 
 class ColliderComponent : public Component{
@@ -12,22 +13,10 @@ public:
 	TransformComponent* transform = nullptr;
 
 	ColliderComponent() = default;
-	ColliderComponent(string desc) {
-		tag = desc;
-	}
+	ColliderComponent(string desc);
 
-	void init() {
-		if (!entity->hasComponent<TransformComponent>()) {
-			entity->addComponent<TransformComponent>();
-		}
-		transform = &entity->getComponent<TransformComponent>();
-	}
+	void init();
 
-	void update() {
-		collider.x = (int) transform->position.x;
-		collider.y = (int) transform->position.y;
-		collider.w = static_cast<int>(transform->width*transform->scale);
-		collider.h = static_cast<int>(transform->height * transform->scale);
-	}
+	void update();
 };
 #endif
