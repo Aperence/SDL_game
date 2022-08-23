@@ -4,12 +4,8 @@
 #include "Utils.h"
 #include <stdlib.h>     /* srand, rand */
 #include <time.h> 
-#include "ECS/Components.h"
-#include "Collision.h"
 
-#include "Script/MovableBullet.h"
-#include "Script/BulletSpawner.h"
-#include "Script/Polygon.h"
+#include "Scenes/Scene1.h"
 
 
 using namespace std;
@@ -18,10 +14,6 @@ SDL_Renderer* Game::renderer;
 int Game::fps = 0;
 int Game::width = 0;
 int Game::height = 0;
-Manager manager;
-auto& bullet = manager.addEntity();
-auto& bulletSpawner = manager.addEntity();
-
 SDL_Event Game::event;
 
 
@@ -61,15 +53,7 @@ void Game::init(const char* title, int xpos, int ypos, int width, int height, bo
 
 	SDL_GetWindowSize(window, &Game::width, &Game::height);
 
-	float half = 258.0 * 0.125 / 2.0;
-	bullet.addComponent<TransformComponent>(width/2 - half ,height/2 - half,258,258,0.125);
-	bullet.addComponent<SpriteComponent>("assets/bullet.png");
-	bullet.addBehaviour<MovableBulletScript>();
-	bullet.addComponent<KeyboardController>();
-	bullet.addComponent<ColliderComponent>();
-
-	bulletSpawner.addBehaviour<BulletSpawner>(&manager);
-	//bulletSpawner.addBehaviour<Polygon>(Vector2D(200,200), Vector2D(1, 0), 1, 5, 90, 50, &manager, 7);
+	SceneManager::addScene<Scene1>();
 }
 
 void Game::handleEvents() {
@@ -83,14 +67,12 @@ void Game::handleEvents() {
 
 void Game::update() {
 	Game::fps++;
-	manager.refresh();
-	manager.update();
-	manager.checkCollisions();
+	SceneManager::update();
 }
 
 void Game::render() {
 	SDL_RenderClear(renderer);
-	manager.render();
+	SceneManager::render();
 	SDL_RenderPresent(renderer);
 }
 

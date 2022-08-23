@@ -7,6 +7,6 @@
 #include "ColliderComponent.h"
 #include "ECS.h"
 #include "Manager.h"
-
+#include "SceneManager.h"
 
 #endif

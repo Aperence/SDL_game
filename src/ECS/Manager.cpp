@@ -1,4 +1,5 @@
 #include "ECS/Manager.h"
+#include "ECS/ColliderComponent.h"
 
 void Manager::update() 
 {
@@ -54,4 +55,10 @@ Entity& Manager::pushEntity()
 	waiting_list.emplace_back(move(uPtr));
 
 	return *e;
+}
+
+void Manager::clear()
+{
+	entities.clear();
+	waiting_list.clear();
 }

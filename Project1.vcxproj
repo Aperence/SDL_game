@@ -137,6 +137,7 @@
     <ClCompile Include="src\ECS\ColliderComponent.cpp" />
     <ClCompile Include="src\ECS\KeyboardController.cpp" />
     <ClCompile Include="src\ECS\Manager.cpp" />
+    <ClCompile Include="src\ECS\SceneManager.cpp" />
     <ClCompile Include="src\ECS\SpriteComponent.cpp" />
     <ClCompile Include="src\ECS\TransformComponent.cpp" />
     <ClCompile Include="src\Script\BulletScript.cpp" />
@@ -144,6 +145,7 @@
     <ClCompile Include="src\Script\MovableBullet.cpp" />
     <ClCompile Include="src\Script\Polygon.cpp" />
     <ClCompile Include="src\Script\Polygon_Bullet.cpp" />
+    <ClCompile Include="src\Scenes\Scene1.cpp" />
     <ClCompile Include="src\Script\WavingBullet.cpp" />
     <ClCompile Include="src\Vector2D.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -159,6 +161,7 @@
     <ClInclude Include="headers\ECS\ECS.h" />
     <ClInclude Include="headers\ECS\KeyboardController.h" />
     <ClInclude Include="headers\ECS\Manager.h" />
+    <ClInclude Include="headers\ECS\SceneManager.h" />
     <ClInclude Include="headers\ECS\TransformComponent.h" />
     <ClInclude Include="headers\ECS\SpriteComponent.h" />
     <ClInclude Include="headers\Game.h" />
@@ -168,6 +171,7 @@
     <ClInclude Include="headers\Script\MovableBullet.h" />
     <ClInclude Include="headers\Script\Polygon.h" />
     <ClInclude Include="headers\Script\Polygon_Bullet.h" />
+    <ClInclude Include="headers\Scenes\Scene1.h" />
     <ClInclude Include="headers\Script\WavingBullet.h" />
     <ClInclude Include="headers\TextureManager.h" />
     <ClInclude Include="headers\Utils.h" />

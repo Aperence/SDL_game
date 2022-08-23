@@ -1,7 +1,7 @@
 #ifndef MANAGER_H
 #define MANAGER_H
 
-#include "Components.h"
+#include "ECS.h"
 
 class Manager {
 private:
@@ -17,6 +17,8 @@ public:
 	Entity& addEntity();
 
 	Entity& pushEntity();
+
+	void clear();
 
 
 };
