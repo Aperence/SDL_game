@@ -23,7 +23,7 @@ void Polygon::init()
 void Polygon::update()
 {
 	if (loading) {
-		draw_triangle(index*angle);
+		if (number_sides > 4) draw_triangle(index*angle);
 		draw_inner(index*angle);
 		index++;
 		if (index >= number_sides) loading = false;

@@ -11,7 +11,7 @@ void MovableBulletScript::update()
 
 void MovableBulletScript::onCollide(Entity& other)
 {
-	cout << "Collision" << endl;
+	//cout << "Collision\n" ;
 }
 
 void MovableBulletScript::handleInput(SDL_Event& event)

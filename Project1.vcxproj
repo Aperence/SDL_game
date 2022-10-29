@@ -24,6 +24,7 @@
     <ProjectGuid>{3f802a09-b54f-4996-9cae-6493e2e8dab3}</ProjectGuid>
     <RootNamespace>Project1</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>Game_sdl</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -104,12 +105,12 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>D:\SDL2_image\SDL2_image-2.6.0\include;D:\Loisirs\code\Game\headers;D:\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>D:\Loisirs\code\Game\src\libs;D:\SDL2_image\SDL2_image-2.6.0\include;D:\Loisirs\code\Game\headers;D:\SDL2\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>D:\SDL2_image\SDL2_image-2.6.0\lib\x64;D:\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>D:\SDL2_image\SDL2_image-2.6.0\lib\x64;D:\Loisirs\code\Game\src\libs;D:\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
@@ -181,6 +182,8 @@
   <ItemGroup>
     <None Include=".gitignore" />
     <None Include="README.md" />
+    <None Include="src\libs\SDL2.dll" />
+    <None Include="src\libs\SDL2_image.dll" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\bullet.png" />
@@ -189,6 +192,13 @@
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Project1.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\..\SDL2_image\SDL2_image-2.6.0\lib\x64\SDL2_image.lib" />
+    <Library Include="src\libs\SDL2.lib" />
+    <Library Include="src\libs\SDL2main.lib" />
+    <Library Include="src\libs\SDL2test.lib" />
+    <Library Include="src\libs\SDL2_image.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

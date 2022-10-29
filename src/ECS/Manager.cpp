@@ -21,6 +21,7 @@ void Manager::refresh()
 			})
 		, entities.end()
 				);
+	//cout << entities.size() << endl;
 }
 
 void Manager::checkCollisions()

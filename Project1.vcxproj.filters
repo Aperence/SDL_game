@@ -79,6 +79,8 @@
   <ItemGroup>
     <None Include="README.md" />
     <None Include=".gitignore" />
+    <None Include="src\libs\SDL2.dll" />
+    <None Include="src\libs\SDL2_image.dll" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="headers\Game.h">
@@ -163,5 +165,12 @@
     <ResourceCompile Include="Project1.rc">
       <Filter>Fichiers de ressources</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="..\..\..\SDL2_image\SDL2_image-2.6.0\lib\x64\SDL2_image.lib" />
+    <Library Include="src\libs\SDL2.lib" />
+    <Library Include="src\libs\SDL2_image.lib" />
+    <Library Include="src\libs\SDL2main.lib" />
+    <Library Include="src\libs\SDL2test.lib" />
   </ItemGroup>
 </Project>
